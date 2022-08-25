@@ -7,25 +7,49 @@ import App from './App'
 //   expect(linkElement).toBeInTheDocument()
 // })
 
-test('button has correct initial color', () => {
-  render(<App />)
-  const colorButton = screen.getByRole('button', {name: 'Change to blue'})
+// test('button has correct initial color', () => {
+//   render(<App />)
+//   const colorButton = screen.getByRole('button', {name: 'Change to blue'})
 
-  //expect the background color to be red
-  expect(colorButton).toHaveStyle({backgroundColor: 'red'})
+//   //expect the background color to be red
+//   expect(colorButton).toHaveStyle({backgroundColor: 'red'})
 
-  //click button
-  fireEvent.click(colorButton)
+//   //click button
+//   fireEvent.click(colorButton)
 
-  //expect the background color to be blue
-  expect(colorButton).toHaveStyle({backgroundColor: 'blue'})
+//   //expect the background color to be blue
+//   expect(colorButton).toHaveStyle({backgroundColor: 'blue'})
 
-  // expect the button text to be 'Change to Red'
-  expect(colorButton.textContent).toBe('Change to red')
-})
+//   // expect the button text to be 'Change to Red'
+//   expect(colorButton.textContent).toBe('Change to red')
+// })
 
 // test('button turns blue when clicked', () => {
 //   render(<App />)
 
 //   const colorButton = screen.getByRole('button', {name: 'Change to blue'})
 // })
+// test('initial condtions', () => {
+//   render(<App />)
+//   //check that the button starts out enabled
+//   const colorButton = screen.getByRole('button', {name: 'Change to blue'})
+//   expect(colorButton).toBeEnabled()
+//   // check taht the checkBox starts out unchecked
+//   const checkbox = screen.getByRole('checkbox')
+//   expect(checkbox).not.toBeChecked()
+// })
+
+test('when checkbox is checked, button sholud be disabled', () => {
+  render(<App />)
+  const colorButton = screen.getByRole('button')
+  expect(colorButton).toBeEnabled()
+
+  //check button
+
+  const checkbox = screen.getByRole('checkbox')
+  fireEvent.click(checkbox)
+  expect(colorButton).toBeDisabled()
+
+  fireEvent.click(checkbox)
+  expect(colorButton).toBeEnabled()
+})
