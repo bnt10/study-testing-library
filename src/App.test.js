@@ -42,7 +42,7 @@ import {replaceCamelWithSpaces} from './App'
 test('Checkbox disables button on first click and enables on second click', () => {
   render(<App />)
   const checkbox = screen.getByRole('checkbox', {name: 'Disable button'})
-  const colorButton = screen.getByRole('button', {name: 'Change to blue'})
+  const colorButton = screen.getByRole('button')
 
   expect(colorButton).toBeEnabled()
 
@@ -53,6 +53,14 @@ test('Checkbox disables button on first click and enables on second click', () =
 
   fireEvent.click(checkbox)
   expect(colorButton).toBeEnabled()
+})
+
+test('Color starts with MediumVioletRed and changes to MidnightBlue', () => {
+  render(<App />)
+  const colorButton = screen.getByRole('button')
+  expect(colorButton.textContent).toBe('Change to MediumVioletRed')
+  fireEvent.click(colorButton)
+  expect(colorButton.textContent).toBe('Change to MidnightBlue')
 })
 
 describe('spaces before camel-case capital letters', () => {
@@ -66,4 +74,6 @@ describe('spaces before camel-case capital letters', () => {
   test('Works for multiple inner capital letters', () => {
     expect(replaceCamelWithSpaces('MediumVioletRed')).toBe('Medium Violet Red')
   })
+
+  test('Color starts with MediumVioletRed and changes to MidnigntBlue', () => {})
 })
